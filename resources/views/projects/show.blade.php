@@ -16,6 +16,7 @@ Project Detail
 <div class="content">
 	<p>Title : {{$project->title}}</p>
 	<p>Description: {{$project->description}}</p>
+	<p>Author: {{$project->owner_id}}</p>
 	<a href="/projects/{{$project->id}}/edit"> Edit </a>
 
 </div>
@@ -54,6 +55,11 @@ Project Detail
 		    <input name="description" class="input {{ $errors->has('description')? 'is-danger': ''}}" type="text" placeholder="Add task description here" required="true">
 		  </div>
 		</div>
+
+		@can('update',$project)
+			<div>  <p> yes it can update the project </p> </div>
+		@endcan
+			
 		<div class="control">
 		  <button class="button is-link">Add</button>
 		</div>

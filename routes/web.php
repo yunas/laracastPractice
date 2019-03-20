@@ -30,7 +30,9 @@ Route::get('/about', 'PagesController@about');
 Route::get('/contact', 'PagesController@contact');
 
 
-Route::resource('/projects','ProjectsController')->middleware('can:update,project');
+Route::resource('/projects','ProjectsController');//->middleware('can:update,project');
+// Route::resource('/projects','ProjectsController')->middleware('can:update,project');
+// Route::resource('/projects','ProjectsController')->middleware('can('update',$project)');
 
 
 Route::post('projects/{project}/tasks','ProjectTasksController@store');
