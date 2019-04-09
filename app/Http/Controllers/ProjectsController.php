@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Project;
 use \App\User;
+use \App\Mail\ProjectCreated;
 
 
 class ProjectsController extends Controller
@@ -21,7 +22,18 @@ class ProjectsController extends Controller
          // $projects = Project::all();
         $projects = Project::where('owner_id',auth()->id())->get();
 
-         return view('projects.index',compact('projects'));
+        //TELESCOPE STUFF
+        // dump($projects);
+        // 
+        // cache()->rememberForever('stats',function(){
+        //     return ['lessons' => '1300', 'hours' => 100];
+        // });
+
+
+        // $stats = cache()->get('stats');
+        // dump($stats);
+
+        return view('projects.index',compact('projects'));
     }
 
     public function create(){
@@ -37,7 +49,15 @@ class ProjectsController extends Controller
         $attributes['owner_id'] = auth()->id(); 
 
         
-        Project::create($attributes);
+        $project = Project::create($attributes);
+
+
+
+        \Mail::to('qaziyunas@gmail.com')->send(
+
+             new ProjectCreated($project)
+                 // new ProjectCreated()
+        );
 
 
         return redirect('/projects');
