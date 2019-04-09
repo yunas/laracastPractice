@@ -20,7 +20,8 @@ class ProjectsController extends Controller
     public function index(){
          
          // $projects = Project::all();
-        $projects = Project::where('owner_id',auth()->id())->get();
+        // $projects = Project::where('owner_id',auth()->id())->get();
+        // $projects = auth()->user()->projects;
 
         //TELESCOPE STUFF
         // dump($projects);
@@ -33,7 +34,11 @@ class ProjectsController extends Controller
         // $stats = cache()->get('stats');
         // dump($stats);
 
-        return view('projects.index',compact('projects'));
+        // return view('projects.index',compact('projects'));
+        return view('projects.index',[
+
+            'projects' => auth()->user()->projects
+        ]);
     }
 
     public function create(){
@@ -41,10 +46,7 @@ class ProjectsController extends Controller
     }
 
     public function store(Project $project){
-        $attributes = request()->validate([
-           'title'  => ['required','min:3'],
-           'description'  => ['required','min:3'],
-        ]);
+        $attributes = $this->validateProject();
 
         $attributes['owner_id'] = auth()->id(); 
 
@@ -84,6 +86,10 @@ class ProjectsController extends Controller
     }
 
     public function update(Project $project){
+
+        $attributes = $this->validateProject();
+
+
         $project->update(request()->all());
         return redirect('/projects');
     }
@@ -92,4 +98,13 @@ class ProjectsController extends Controller
        $project->delete();
        return redirect('/projects');
     }
+
+
+    protected function validateProject(){
+        return request()->validate([
+           'title'  => ['required','min:3'],
+           'description'  => ['required','min:3'],
+        ]);
+    }
+
 }

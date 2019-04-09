@@ -43,7 +43,7 @@ Edit Project
 </form>
 
 
-
+@include('errors')
 
 
 @endsection
