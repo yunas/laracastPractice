@@ -55,7 +55,7 @@ class ProjectsController extends Controller
 
 
 
-        \Mail::to('qaziyunas@gmail.com')->send(
+        \Mail::to($project->owner->email)->send(
 
              new ProjectCreated($project)
                  // new ProjectCreated()
