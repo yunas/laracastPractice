@@ -9,19 +9,9 @@ Projects
 @section('content')
 
 
-	<h1 class="title"> Projects </h1>
+	<h1 class="title"> Projects List </h1>
 
-        <section class="hero">
-            <div class="container">
-              <h2 class="title">
-              	<a href="/projects/create"> Create New Project  </a>
-              </h2>
-          </div>
-        </section>
-        <p >
-    		
-        </p>
-
+  
 
   <ul>
     	
@@ -36,7 +26,7 @@ Projects
         @endforeach        
 
     </ul>
-
-
+    <br/>
+    <a class="button is-link" href="/projects/create">Create New Project</a>
 
 @endsection

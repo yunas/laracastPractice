@@ -16,7 +16,7 @@ Project Detail
 <div class="content">
 	<p>Title : {{$project->title}}</p>
 	<p>Description: {{$project->description}}</p>
-	<p>Author: {{$project->owner_id}}</p>
+	<p>Author: {{$project->owner->name}}</p>
 	<a href="/projects/{{$project->id}}/edit"> Edit </a>
 
 </div>

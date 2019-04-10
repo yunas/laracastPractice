@@ -21,4 +21,9 @@ class Project extends Model
     	$this->tasks()->create(compact('description'));
 
     }
+
+    public function owner(){
+        return $this->belongsTo(User::class);
+    }
+
 }
