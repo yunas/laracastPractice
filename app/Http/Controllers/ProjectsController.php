@@ -8,6 +8,8 @@ use \App\User;
 // use \App\Mail\ProjectCreated;
 // use \App\Event\ProjectUpdated;
 use \App\Events\ProjectUpdated;
+use \App\Notifications\ProjectDeleted;
+
 
 
 class ProjectsController extends Controller
@@ -20,7 +22,6 @@ class ProjectsController extends Controller
 
     //
     public function index(){
-         
          // $projects = Project::all();
         // $projects = Project::where('owner_id',auth()->id())->get();
         // $projects = auth()->user()->projects;
@@ -56,7 +57,7 @@ class ProjectsController extends Controller
         Project::create($attributes);
 
 
-        
+
 
 
         return redirect('/projects');
@@ -94,10 +95,14 @@ class ProjectsController extends Controller
     }
 
     public function destroy(Project $project){
-       $project->delete();
+       // $user = \App\Project::where('owner_id',$project->id);
+       $user = auth()->user();
+       $user->notify(new ProjectDeleted);
+
+
+       // $project->delete();
        return redirect('/projects');
     }
-
 
     protected function validateProject(){
         return request()->validate([

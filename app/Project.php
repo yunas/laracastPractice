@@ -11,7 +11,7 @@ class Project extends Model
 {
     //
     // protected $guarded = [];
-
+    protected $fillable = ['title','description','owner_id'];
     protected $dispatchesEvents = [
         'updated' => ProjectUpdated::class
 
@@ -31,7 +31,7 @@ class Project extends Model
 	}
 
 
-    protected $fillable = ['title','description','owner_id'];
+    
     
     public function tasks(){
 
