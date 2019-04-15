@@ -5,18 +5,23 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 use \App\Mail\ProjectCreated;
+use \App\Events\ProjectUpdated;
 
 class Project extends Model
 {
     //
     // protected $guarded = [];
 
+    protected $dispatchesEvents = [
+        'updated' => ProjectUpdated::class
+
+    ];
 
 
 	protected static function boot(){
 		parent::boot();
 		static::created(function($project){
-
+        dump($project);
 	        \Mail::to($project->owner->email)->send(
              	new ProjectCreated($project)
                  	// new ProjectCreated()

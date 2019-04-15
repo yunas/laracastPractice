@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Project;
 use \App\User;
-use \App\Mail\ProjectCreated;
+// use \App\Mail\ProjectCreated;
+// use \App\Event\ProjectUpdated;
+use \App\Events\ProjectUpdated;
 
 
 class ProjectsController extends Controller
@@ -54,7 +56,7 @@ class ProjectsController extends Controller
         Project::create($attributes);
 
 
-
+        
 
 
         return redirect('/projects');
@@ -83,9 +85,11 @@ class ProjectsController extends Controller
     public function update(Project $project){
 
         $attributes = $this->validateProject();
-
-
+        
         $project->update(request()->all());
+
+        // event(new ProjectUpdated($project));
+
         return redirect('/projects');
     }
 
