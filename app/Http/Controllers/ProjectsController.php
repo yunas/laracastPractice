@@ -20,6 +20,8 @@ class ProjectsController extends Controller
         $this->middleware('auth');
     }
 
+
+
     //
     public function index(){
          // $projects = Project::all();
@@ -54,11 +56,9 @@ class ProjectsController extends Controller
         $attributes['owner_id'] = auth()->id(); 
 
         
-        Project::create($attributes);
+        $project = Project::create($attributes);
 
-
-
-
+        flash('Your Project ('.$project->title.') is created');
 
         return redirect('/projects');
     }

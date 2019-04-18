@@ -21,7 +21,7 @@ class Project extends Model
 	protected static function boot(){
 		parent::boot();
 		static::created(function($project){
-        dump($project);
+        // dump($project);
 	        \Mail::to($project->owner->email)->send(
              	new ProjectCreated($project)
                  	// new ProjectCreated()

@@ -8,6 +8,10 @@ Projects
 
 @section('content')
 
+    @if (session('message'))
+        <p> {{ session('message','No message found') }} </p>
+    @endif
+
 
 	<h1 class="title"> Projects List </h1>
 
